@@ -56,8 +56,12 @@ class LPS331
     void writeReg(byte reg, byte value);
     byte readReg(byte reg);
     
-    long readPressure(void);
-    int readTemperature(void);
+    float readPressure(void);
+    long readRawPressure(void); 
+    float readTemperature(void);
+    int readRawTemperature(void);
+    
+    float toAltitude(float pressure_mbar);
   
   private:
     byte address;
