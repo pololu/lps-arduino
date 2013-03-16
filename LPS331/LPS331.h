@@ -61,12 +61,12 @@ class LPS331
     float readTemperature(void);
     int readRawTemperature(void);
     
-    float toAltitude(float pressure_mbar);
+    static float toAltitude(float pressure_mbar);
   
   private:
     byte address;
     
     bool autoDetectAddress(void);
-}
+};
 
 #endif
