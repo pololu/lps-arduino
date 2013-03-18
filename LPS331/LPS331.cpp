@@ -71,7 +71,7 @@ long LPS331::readRawPressure(void)
   uint8_t ph = Wire.read();
 
   // combine bytes
-  return (int32_t)((int32_t)ph << 16 | pl << 8 | pxl);
+  return (int32_t)ph << 16 | (uint16_t)pl << 8 | pxl;
 }
 
 float LPS331::readTemperature(void)
