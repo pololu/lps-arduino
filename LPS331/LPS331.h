@@ -27,10 +27,10 @@
 #define LPS331_CTRL_REG1      0x20
 #define LPS331_CTRL_REG2      0x21
 #define LPS331_CTRL_REG3      0x22
-#define LPS331_INTERRUPT_CFG    0x23
-#define LPS331_INT_SOURCE 0x24
-#define LPS331_THS_P_L  0x25
-#define LPS331_THS_P_H 0x26
+#define LPS331_INTERRUPT_CFG  0x23
+#define LPS331_INT_SOURCE     0x24
+#define LPS331_THS_P_L        0x25
+#define LPS331_THS_P_H        0x26
 #define LPS331_STATUS_REG     0x27
 
 #define LPS331_PRESS_OUT_XL   0x28
