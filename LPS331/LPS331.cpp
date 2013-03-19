@@ -23,9 +23,8 @@ bool LPS331::init(byte sa0)
 
 void LPS331::enableDefault(void)
 {
-  // 0b11100000
   // active mode, 12.5 Hz output data rate
-  writeReg(LPS331_CTRL_REG1, 0xE0);
+  writeReg(LPS331_CTRL_REG1, 0b11100000);
 }
     
 void LPS331::writeReg(byte reg, byte value)
@@ -50,12 +49,17 @@ byte LPS331::readReg(byte reg)
   return value;
 }
     
-float LPS331::readPressure(void)
+float LPS331::readPressureMillibars(void)
 {
-  return (float)readRawPressure() / 4096;
+  return (float)readPressureRaw() / 4096;
 }
 
-long LPS331::readRawPressure(void)
+float LPS331::readPressureInchesHg(void)
+{
+  return (float)readPressureRaw() / 138706.5;
+}
+
+long LPS331::readPressureRaw(void)
 {
   Wire.beginTransmission(address);
   // assert the MSB of the address to get the pressure sensor
@@ -74,14 +78,19 @@ long LPS331::readRawPressure(void)
   return (int32_t)ph << 16 | (uint16_t)pl << 8 | pxl;
 }
 
-float LPS331::readTemperature(void)
+float LPS331::readTemperatureC(void)
 {
-  return 42.5 + (float)readRawTemperature() / 480;
+  return 42.5 + (float)readTemperatureRaw() / 480;
 }
 
-int LPS331::readRawTemperature(void)
+float LPS331::readTemperatureF(void)
 {
-    Wire.beginTransmission(address);
+  return 108.5 + (float)readTemperatureRaw() / 480 * 1.8;
+}
+
+int LPS331::readTemperatureRaw(void)
+{
+  Wire.beginTransmission(address);
   // assert the MSB of the address to get the pressure sensor
   // to do slave-transmit subaddress updating.
   Wire.write(LPS331_TEMP_OUT_L | (1 << 7));
@@ -94,14 +103,18 @@ int LPS331::readRawTemperature(void)
   uint8_t th = Wire.read();
 
   // combine bytes
-  return (int16_t)(th << 8 | tl);
-}
-    
-float LPS331::toAltitude(float pressure_mbar)
-{
-  return (1 - pow(pressure_mbar / 1013.25, 0.190284)) * 44307.694;
+  return (int16_t)th << 8 | tl;
 }
 
+float LPS331::pressureToAltitudeMeters(float pressure_mbar, float altimeter_setting_mbar)
+{
+  return (pow(altimeter_setting_mbar / 1013.25, 0.190263) - pow(pressure_mbar / 1013.25, 0.190263)) * 44330.8;
+}
+
+float LPS331::pressureToAltitudeFeet(float pressure_inHg, float altimeter_setting_inHg)
+{
+  return (pow(altimeter_setting_inHg / 29.9213, 0.190263) - pow(pressure_inHg / 29.9213, 0.190263)) * 145442;
+}
 
 bool LPS331::autoDetectAddress(void)
 {
