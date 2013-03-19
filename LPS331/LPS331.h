@@ -49,26 +49,28 @@
 class LPS331
 {
   public:
+    LPS331(void);
+
     bool init(byte sa0 = LPS331_SA0_AUTO);
-    
+
     void enableDefault(void);
-    
+
     void writeReg(byte reg, byte value);
     byte readReg(byte reg);
-    
+
     float readPressureMillibars(void);
     float readPressureInchesHg(void);
-    long readPressureRaw(void); 
+    long readPressureRaw(void);
     float readTemperatureC(void);
     float readTemperatureF(void);
     int readTemperatureRaw(void);
-    
+
     static float pressureToAltitudeMeters(float pressure_mbar, float altimeter_setting_mbar = 1013.25);
     static float pressureToAltitudeFeet(float pressure_inHg, float altimeter_setting_inHg = 29.9213);
-  
+
   private:
     byte address;
-    
+
     bool autoDetectAddress(void);
 };
 
