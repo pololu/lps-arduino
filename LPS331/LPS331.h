@@ -9,7 +9,6 @@
 #define LPS331_SA0_HIGH 1
 #define LPS331_SA0_AUTO 2
 
-
 // register addresses
 // Note: Some of the register names in the datasheet are inconsistent
 // between Table 14 in section 6 and the register descriptions in
