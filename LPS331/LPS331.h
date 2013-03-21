@@ -72,6 +72,7 @@ class LPS331
     byte address;
 
     bool autoDetectAddress(void);
+    bool testWhoAmI(void);
 };
 
 #endif

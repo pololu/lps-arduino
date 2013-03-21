@@ -26,11 +26,11 @@ bool LPS331::init(byte sa0)
   {
     case LPS331_SA0_LOW:
       address = LPS331AP_ADDRESS_SA0_LOW;
-      return true;
+      return testWhoAmI();
 
     case LPS331_SA0_HIGH:
       address = LPS331AP_ADDRESS_SA0_HIGH;
-      return true;
+      return testWhoAmI();
 
     default:
       return autoDetectAddress();
@@ -160,9 +160,14 @@ bool LPS331::autoDetectAddress(void)
 {
   // try each possible address and stop if reading WHO_AM_I returns the expected response
   address = LPS331AP_ADDRESS_SA0_LOW;
-  if (readReg(LPS331_WHO_AM_I) == 0xBB) return true;
+  if (testWhoAmI()) return true;
   address = LPS331AP_ADDRESS_SA0_HIGH;
-  if (readReg(LPS331_WHO_AM_I) == 0xBB) return true;
+  if (testWhoAmI()) return true;
 
   return false;
+}
+
+bool LPS331::testWhoAmI(void)
+{
+  return (readReg(LPS331_WHO_AM_I) == 0xBB);
 }
