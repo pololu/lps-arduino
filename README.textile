@@ -1,0 +1,86 @@
+h1. Arduino library for Pololu LPS331AP pressure/altitude sensor carrier
+
+Version: 1.0.0
+Release Date: 2012-03-21
+"www.pololu.com":http://www.pololu.com/
+
+
+h2. Summary
+
+This is a library for the "Arduino":http://pololu.com/catalog/product/2191 that interfaces with the "Pololu LPS331AP pressure/altitude sensor carrier":http://www.pololu.com/catalog/product/2126. It makes it simple to read the raw pressure data from the sensor, and it provides functions to help calculate altitude based on the measured pressure.
+
+
+h2. Getting Started
+
+h3. Software
+
+Download the archive from "GitHub":https://github.com/pololu/LPS331, decompress it, and move the "LPS331" folder into the "libraries" subdirectory inside your Arduino sketchbook directory. You can view your sketchbook location by selecting File->Preferences in the Arduino environment; if there is not already a "libraries" folder in that location, you should create it yourself. After installing the library, restart the Arduino environment so it can find the L3G library and its example.
+
+h3. Hardware
+
+Make the following connections with wires between the Arduino and the LPS331AP:
+
+pre. Arduino Uno/Duemilanove      LPS331AP carrier
+                     5V  ->  VIN
+                    GND  ->  GND
+           Analog pin 4  ->  SDA
+           Analog pin 5  ->  SCL
+
+
+pre. Arduino Leonardo             LPS331AP carrier
+                     5V  ->  VIN
+                    GND  ->  GND
+          Digital pin 2  ->  SDA
+          Digital pin 3  ->  SCL
+
+pre. Arduino Mega/Due             LPS331AP carrier
+                     5V  ->  VIN
+                    GND  ->  GND
+         Digital pin 20  ->  SDA
+         Digital pin 21  ->  SCL
+
+         
+h2. Example Programs
+
+Open an example code sketch by selecting File->Examples->L3G->example_name
+
+h3. SerialMetric
+
+This program continuously takes pressure and temperature readings from the sensor and calculates an altitude from the pressure. It shows the data in metric units: pressure in millibars (mbar) (which are equivalent to hectopascals (hPa)), altitude in meters, and temperature in degrees Celsius. The program's output is sent over the serial interface, and you can display it with the Arduino Serial Monitor.
+
+Example output:
+
+pre. p: 931.93 mbar	a: 700.02 m	t: 29.92 deg C
+p: 931.85 mbar	a: 700.73 m	t: 29.92 deg C
+p: 931.75 mbar	a: 701.68 m	t: 29.89 deg C
+
+h3. SerialUS
+
+This program is the same as SerialMetric, except that it shows the data in United States customary units: pressure in inches of mercury (inHg), altitude in feet, and temperature in degrees Fahrenheit. 
+
+Example output:
+
+pre. p: 27.52 inHg	a: 2296.55 ft	t: 83.19 deg F
+p: 27.52 inHg	a: 2295.50 ft	t: 83.18 deg F
+p: 27.52 inHg	a: 2296.42 ft	t: 83.17 deg F
+
+
+h2. Library Reference
+
+- @bool init(byte sa0)@ := Initializes the library with the state of the SA0 (slave address least significant bit) pin. Constants for this argument are defined in LPS331.h. The argument is optional; if it is not specified, the library will try to automatically detect the slave address. The return value is a boolean indicating whether auto-detection or communication on the specified address was successful.
+- @void enableDefault(void)@ := Turns on the pressure sensor in a default configuration that gives continous output at 12.5 Hz.
+- @void writeReg(byte reg, byte value)@ := Writes a pressure sensor register with the given value. Register address constants are defined in LPS331.h.
+- @byte readReg(byte reg)@ := Reads a pressure sensor register and returns the value read.
+- @float readPressureMillibars(void)@ := Returns a pressure reading from the sensor in units of millibars (mbar)/hectopascals (hPa).
+- @float readPressureInchesHg(void)@ := Returns a pressure reading from the sensor in units of inches of mercury (inHg).
+- @long readPressureRaw(void)@ := Returns a raw 24-bit pressure reading from the sensor.
+- @float readTemperatureC(void)@ := Returns a temperature reading from the sensor in units of degrees Celsius.
+- @float readTemperatureF(void)@ := Returns a temperature reading from the sensor in units of degrees Fahrenheit.
+- @int readTemperatureRaw(void)@ := Returns a raw 16-bit temperature reading from the sensor.
+- @float pressureToAltitudeMeters(float pressure_mbar, float altimeter_setting_mbar)@ := Converts a pressure in mbar to an altitude in meters, using the 1976 "U.S. Standard Atmosphere":http://en.wikipedia.org/wiki/U.S._Standard_Atmosphere model (note that this formula only applies to a height of 11 km, or about 36000 ft). If the optional @altimeter_setting_mbar@ argument is given, specifying an "altimeter setting" or "QNH" (barometric pressure adjusted to sea level, often used in aviation), this function returns an indicated altitude compensated for the actual regional pressure. Otherwise, it returns a pressure altitude above the standard pressure level of 1013.25 mbar (29.9213 inHg).
+- @float pressureToAltitudeFeet(float pressure_inHg, float altimeter_setting_inHg)@ := Converts a pressure in inHg to an altitude in feet. See the preceding description of @pressureToAltitudeMeters()@ for details.
+
+
+h2. Version History
+
+* 1.0.0 (2013-03-21): Original release.
