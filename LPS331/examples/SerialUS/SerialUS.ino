@@ -23,7 +23,6 @@ void loop()
   float altitude = ps.pressureToAltitudeFeet(pressure);
   float temperature = ps.readTemperatureF();
 
-  
   Serial.print("p: ");
   Serial.print(pressure);
   Serial.print(" inHg\ta: ");
