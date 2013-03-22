@@ -145,13 +145,13 @@ int LPS331::readTemperatureRaw(void)
 //  mbar or 29.9213 inHg
 float LPS331::pressureToAltitudeMeters(float pressure_mbar, float altimeter_setting_mbar)
 {
-  return (pow(altimeter_setting_mbar / 1013.25, 0.190263) - pow(pressure_mbar / 1013.25, 0.190263)) * 44330.8;
+  return (1 - pow(pressure_mbar / altimeter_setting_mbar, 0.190263)) * 44330.8;
 }
 
 // converts pressure in inHg to altitude in feet; see notes above
 float LPS331::pressureToAltitudeFeet(float pressure_inHg, float altimeter_setting_inHg)
 {
-  return (pow(altimeter_setting_inHg / 29.9213, 0.190263) - pow(pressure_inHg / 29.9213, 0.190263)) * 145442;
+  return (1 - pow(pressure_inHg / altimeter_setting_inHg, 0.190263)) * 145442;
 }
 
 // Private Methods ///////////////////////////////////////////////////
