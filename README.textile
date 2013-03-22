@@ -1,7 +1,7 @@
 h1. Arduino library for Pololu LPS331AP pressure/altitude sensor carrier
 
 Version: 1.0.0
-Release Date: 2012-03-21
+Release Date: 2012-03-22
 "www.pololu.com":http://www.pololu.com/
 
 
@@ -83,4 +83,4 @@ h2. Library Reference
 
 h2. Version History
 
-* 1.0.0 (2013-03-21): Original release.
+* 1.0.0 (2013-03-22): Original release.
