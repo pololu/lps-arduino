@@ -14,7 +14,7 @@ h2. Getting Started
 
 h3. Software
 
-Download the archive from "GitHub":https://github.com/pololu/LPS331, decompress it, and move the "LPS331" folder into the "libraries" subdirectory inside your Arduino sketchbook directory. You can view your sketchbook location by selecting File->Preferences in the Arduino environment; if there is not already a "libraries" folder in that location, you should create it yourself. After installing the library, restart the Arduino environment so it can find the L3G library and its example.
+Download the archive from "GitHub":https://github.com/pololu/LPS331, decompress it, and move the "LPS331" folder into the "libraries" subdirectory inside your Arduino sketchbook directory. You can view your sketchbook location by selecting File->Preferences in the Arduino environment; if there is not already a "libraries" folder in that location, you should create it yourself. After installing the library, restart the Arduino environment so it can find the LPS331 library and its example.
 
 h3. Hardware
 
@@ -42,7 +42,7 @@ pre. Arduino Mega/Due             LPS331AP carrier
          
 h2. Example Programs
 
-Open an example code sketch by selecting File->Examples->L3G->example_name
+Open an example code sketch by selecting File->Examples->LPS331->example_name
 
 h3. SerialMetric
 
