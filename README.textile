@@ -1,7 +1,7 @@
 h1. Arduino library for Pololu LPS331AP pressure/altitude sensor carrier
 
-Version: 1.0.0
-Release Date: 2012-03-22
+Version: 1.0.1
+Release Date: 2014-01-08
 "www.pololu.com":http://www.pololu.com/
 
 
@@ -33,12 +33,18 @@ pre. Arduino Leonardo             LPS331AP carrier
           Digital pin 2  ->  SDA
           Digital pin 3  ->  SCL
 
-pre. Arduino Mega/Due             LPS331AP carrier
+pre. Arduino Mega                 LPS331AP carrier
                      5V  ->  VIN
                     GND  ->  GND
          Digital pin 20  ->  SDA
          Digital pin 21  ->  SCL
 
+pre. Arduino Due                  LPS331AP carrier
+                   3.3V  ->  VIN (or VDD)
+                    GND  ->  GND
+         Digital pin 20  ->  SDA
+         Digital pin 21  ->  SCL
+         
          
 h2. Example Programs
 
@@ -83,4 +89,5 @@ h2. Library Reference
 
 h2. Version History
 
+* 1.0.1 (2014-01-08): Changed raw output byte combination logic to work properly on 32-bit microcontrollers and be more portable.
 * 1.0.0 (2013-03-22): Original release.
