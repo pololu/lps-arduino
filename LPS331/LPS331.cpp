@@ -81,7 +81,7 @@ float LPS331::readPressureInchesHg(void)
 }
 
 // reads pressure and returns raw 24-bit sensor output
-long LPS331::readPressureRaw(void)
+int32_t LPS331::readPressureRaw(void)
 {
   Wire.beginTransmission(address);
   // assert MSB to enable register address auto-increment
@@ -96,10 +96,7 @@ long LPS331::readPressureRaw(void)
   uint8_t ph = Wire.read();
 
   // combine bytes
-  //  GCC performs an arithmetic right shift for signed negative
-  //  numbers, but this code will not work if you port it to a
-  //  compiler that does a logical right shift instead.
-  return (int32_t)ph << 16 | (uint16_t)pl << 8 | pxl;
+  return (int32_t)(int8_t)ph << 16 | (uint16_t)pl << 8 | pxl;
 }
 
 // reads temperature in degrees C
@@ -115,7 +112,7 @@ float LPS331::readTemperatureF(void)
 }
 
 // reads temperature and returns raw 16-bit sensor output
-int LPS331::readTemperatureRaw(void)
+int16_t LPS331::readTemperatureRaw(void)
 {
   Wire.beginTransmission(address);
   // assert MSB to enable register address auto-increment
@@ -129,10 +126,7 @@ int LPS331::readTemperatureRaw(void)
   uint8_t th = Wire.read();
 
   // combine bytes
-  //  GCC performs an arithmetic right shift for signed negative
-  //  numbers, but this code will not work if you port it to a
-  //  compiler that does a logical right shift instead.
-  return (int16_t)th << 8 | tl;
+  return (int16_t)(th << 8 | tl);
 }
 
 // converts pressure in mbar to altitude in meters, using 1976 US

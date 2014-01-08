@@ -59,10 +59,10 @@ class LPS331
 
     float readPressureMillibars(void);
     float readPressureInchesHg(void);
-    long readPressureRaw(void);
+    int32_t readPressureRaw(void);
     float readTemperatureC(void);
     float readTemperatureF(void);
-    int readTemperatureRaw(void);
+    int16_t readTemperatureRaw(void);
 
     static float pressureToAltitudeMeters(float pressure_mbar, float altimeter_setting_mbar = 1013.25);
     static float pressureToAltitudeFeet(float pressure_inHg, float altimeter_setting_inHg = 29.9213);
