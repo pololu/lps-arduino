@@ -1,14 +1,15 @@
-h1. Arduino library for Pololu LPS331AP boards
+h1. Arduino library for Pololu LPS pressure sensor boards
 
-Version: 1.0.1
-Release Date: 2014-01-08
+Version: 2.0.0
+Release Date: 2014-06-03
 "www.pololu.com":http://www.pololu.com/
 
 
 h2. Summary
 
-This is a library for the "Arduino":http://pololu.com/catalog/product/2191 that interfaces with LPS331AP pressure sensors on Pololu boards. It makes it simple to read the raw pressure data from these boards:
+This is a library for the "Arduino":http://pololu.com/catalog/product/2191 that interfaces with ST LPS25H and LPS331AP pressure sensors on Pololu boards. It makes it simple to read the raw pressure data from these boards:
 
+* "Pololu LPS25H pressure/altitude sensor carrier":http://www.pololu.com/catalog/product/2724
 * "Pololu LPS331AP pressure/altitude sensor carrier":http://www.pololu.com/catalog/product/2126
 * "AltIMU-10 &#40;L3GD20, LSM303DLHC, and LSM331AP carrier)":http://www.pololu.com/catalog/product/1269
 
@@ -19,41 +20,48 @@ h2. Getting Started
 
 h3. Software
 
-Download the archive from "GitHub":https://github.com/pololu/lps331-arduino, decompress it, and move the "LPS331" folder into the "libraries" subdirectory inside your Arduino sketchbook directory. You can view your sketchbook location by selecting File->Preferences in the Arduino environment; if there is not already a "libraries" folder in that location, you should create it yourself. After installing the library, restart the Arduino environment so it can find the LPS331 library and its example.
+Download the archive from "GitHub":https://github.com/pololu/lps-arduino, decompress it, and move the "LPS" folder into the "libraries" subdirectory inside your Arduino sketchbook directory. You can view your sketchbook location by selecting File->Preferences in the Arduino environment; if there is not already a "libraries" folder in that location, you should create it yourself. After installing the library, restart the Arduino environment so it can find the LPS library and its example.
 
 h3. Hardware
 
-Make the following connections with wires between the Arduino and the LPS331AP:
+Make the following connections with wires between the Arduino and the LPS board:
 
-pre. Arduino Uno/Duemilanove      LPS331AP carrier
-                     5V  ->  VIN
-                    GND  ->  GND
-           Analog pin 4  ->  SDA
-           Analog pin 5  ->  SCL
+h4. Arduino Uno (and other ATmega328/ATmega168 boards)
 
+pre.              Arduino      LPS board
+                  5V  ->  VIN
+                 GND  ->  GND
+  SDA (Analog pin 4)  ->  SDA
+  SCL (Analog pin 5)  ->  SCL
 
-pre. Arduino Leonardo             LPS331AP carrier
-                     5V  ->  VIN
-                    GND  ->  GND
-          Digital pin 2  ->  SDA
-          Digital pin 3  ->  SCL
+h4. Arduino Leonardo/Micro (and other ATmega32U4 boards)
 
-pre. Arduino Mega                 LPS331AP carrier
-                     5V  ->  VIN
-                    GND  ->  GND
-         Digital pin 20  ->  SDA
-         Digital pin 21  ->  SCL
+pre.              Arduino      LPS board
+                  5V  ->  VIN
+                 GND  ->  GND
+ SDA (Digital pin 2)  ->  SDA
+ SCL (Digital pin 3)  ->  SCL
 
-pre. Arduino Due                  LPS331AP carrier
-                   3.3V  ->  VIN (or VDD)
-                    GND  ->  GND
-         Digital pin 20  ->  SDA
-         Digital pin 21  ->  SCL
+h4. Arduino Mega
+      
+pre.              Arduino      LPS board
+                  5V  ->  VIN
+                 GND  ->  GND
+SDA (Digital pin 20)  ->  SDA
+SCL (Digital pin 21)  ->  SCL
+         
+h4. Arduino Due
+
+pre.              Arduino      LPS board
+                3.3V  ->  VIN or VDD
+                 GND  ->  GND
+SDA (Digital pin 20)  ->  SDA
+SCL (Digital pin 21)  ->  SCL
          
          
 h2. Example Programs
 
-Open an example code sketch by selecting File->Examples->LPS331->example_name
+Open an example code sketch by selecting File->Examples->LPS->example_name
 
 h3. SerialMetric
 
@@ -78,10 +86,14 @@ p: 27.52 inHg	a: 2296.42 ft	t: 83.17 deg F
 
 h2. Library Reference
 
-- @bool init(byte sa0)@ := Initializes the library with the state of the SA0 (slave address least significant bit) pin. Constants for this argument are defined in LPS331.h. The argument is optional; if it is not specified, the library will try to automatically detect the slave address. The return value is a boolean indicating whether auto-detection or communication on the specified address was successful.
+- @bool init(deviceType device, byte sa0)@ := Initializes the library with the device being used (@LPS::device_331AP@, @LPS::device_25H@, or @LPS::device_auto@) and the state of the SA0 pin (@LPS::sa0_low@, @LPS::sa0_high@, or @LPS::sa0_auto@; @LOW@ or @HIGH@ also work), which determines the least significant bit of the sensor's address. Both of these arguments are optional; if they are not specified, the library will try to automatically detect the device and address. The return value is a boolean indicating whether a device was successfully detected.
+*Note:* Automatic detection currently does not work on the Arduino Due because of issues with its Wire library. To work around this, specify the device and SA0 state manually (e.g. @init(LPS::device_331AP, LPS::sa0_high)@).
+- @deviceType getDeviceType(void)@ := Returns the device type detected by @init()@.
+- @byte getAddress(void)@ := Returns the address detected by @init()@.
 - @void enableDefault(void)@ := Turns on the pressure sensor in a default configuration that gives continous output at 12.5 Hz.
-- @void writeReg(byte reg, byte value)@ := Writes a pressure sensor register with the given value. Register address constants are defined in LPS331.h.
-- @byte readReg(byte reg)@ := Reads a pressure sensor register and returns the value read.
+- @void writeReg(int reg, byte value)@ := Writes a pressure sensor register with the given value. Register addresses are defined by the regAddr enumeration type in LPS.h.
+Example use: @ps.writeReg(LPS::CTRL_REG1, 0xE0);@
+- @byte readReg(int reg)@ := Reads a pressure sensor register and returns the value read.
 - @float readPressureMillibars(void)@ := Returns a pressure reading from the sensor in units of millibars (mbar)/hectopascals (hPa).
 - @float readPressureInchesHg(void)@ := Returns a pressure reading from the sensor in units of inches of mercury (inHg).
 - @long readPressureRaw(void)@ := Returns a raw 24-bit pressure reading from the sensor.
@@ -94,5 +106,9 @@ h2. Library Reference
 
 h2. Version History
 
+* 2.0.0 (2014-06-03): Major rewrite. List of significant changes:
+** Renamed library to LPS.
+** Added support for LPS25H and automatic detection of device type.
+** Library constants converted to enums.
 * 1.0.1 (2014-01-08): Changed raw output byte combination logic to work properly on 32-bit microcontrollers and be more portable.
-* 1.0.0 (2013-03-22): Original release.
+* 1.0.0 (2013-03-22): Original release of LPS331 library.
