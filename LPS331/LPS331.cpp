@@ -20,15 +20,15 @@ LPS331::LPS331(void)
 // Public Methods ////////////////////////////////////////////////////
 
 // sets or detects slave address; returns bool indicating success
-bool LPS331::init(byte sa0)
+bool LPS331::init(sa0State sa0)
 {
   switch(sa0)
   {
-    case LPS331_SA0_LOW:
+    case sa0_low:
       address = LPS331AP_ADDRESS_SA0_LOW;
       return testWhoAmI();
 
-    case LPS331_SA0_HIGH:
+    case sa0_high:
       address = LPS331AP_ADDRESS_SA0_HIGH;
       return testWhoAmI();
 
@@ -41,7 +41,7 @@ bool LPS331::init(byte sa0)
 void LPS331::enableDefault(void)
 {
   // active mode, 12.5 Hz output data rate
-  writeReg(LPS331_CTRL_REG1, 0b11100000);
+  writeReg(CTRL_REG1, 0b11100000);
 }
 
 // writes register
@@ -85,7 +85,7 @@ int32_t LPS331::readPressureRaw(void)
 {
   Wire.beginTransmission(address);
   // assert MSB to enable register address auto-increment
-  Wire.write(LPS331_PRESS_OUT_XL | (1 << 7));
+  Wire.write(PRESS_OUT_XL | (1 << 7));
   Wire.endTransmission();
   Wire.requestFrom(address, (byte)3);
 
@@ -116,7 +116,7 @@ int16_t LPS331::readTemperatureRaw(void)
 {
   Wire.beginTransmission(address);
   // assert MSB to enable register address auto-increment
-  Wire.write(LPS331_TEMP_OUT_L | (1 << 7));
+  Wire.write(TEMP_OUT_L | (1 << 7));
   Wire.endTransmission();
   Wire.requestFrom(address, (byte)2);
 
@@ -163,5 +163,5 @@ bool LPS331::autoDetectAddress(void)
 
 bool LPS331::testWhoAmI(void)
 {
-  return (readReg(LPS331_WHO_AM_I) == 0xBB);
+  return (readReg(WHO_AM_I) == 0xBB);
 }
