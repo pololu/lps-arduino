@@ -17,7 +17,7 @@ these boards:
 * [Pololu LPS25H pressure/altitude sensor carrier](https://www.pololu.com/catalog/product/2724)
 * [Pololu LPS331AP pressure/altitude sensor carrier](https://www.pololu.com/catalog/product/2126)
 * [AltIMU-10 v3 (L3GD20H, LSM303D, and LSM331AP carrier)](https://www.pololu.com/catalog/product/2469)
-* [AltIMU-10 (L3GD20, LSM303DLHC, and LSM331AP carrier)](https://www.pololu.com/catalog/product/1269)
+* [AltIMU-10 (L3GD20, LSM303DLHC, and LSM331AP carrier)](https://www.pololu.com/catalog/product/1269) (discontinued)
 
 The library also provides functions to help calculate altitude based
 on the measured pressure.
