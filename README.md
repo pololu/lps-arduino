@@ -183,8 +183,8 @@ Example output:
 
 * 3.0.0 (2016-08-17): Updated library to work with the Arduino Library Manager.
 * 2.0.0 (2014-06-03): Major rewrite. List of significant changes:
-** Renamed library to LPS.
-** Added support for LPS25H and automatic detection of device type.
-** Library constants converted to enums.
+   * Renamed library to LPS.
+   * Added support for LPS25H and automatic detection of device type.
+   * Library constants converted to enums.
 * 1.0.1 (2014-01-08): Changed raw output byte combination logic to work properly on 32-bit microcontrollers and be more portable.
 * 1.0.0 (2013-03-22): Original release of LPS331 library.
