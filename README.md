@@ -127,10 +127,7 @@ Example output:
   sensor's address. Both of these arguments are optional; if they are
   not specified, the library will try to automatically detect the
   device and address. The return value is a boolean indicating whether
-  a device was successfully detected.  **Note:** Automatic detection
-  currently does not work on the Arduino Due because of issues with
-  its Wire library. To work around this, specify the device and SA0
-  state manually (e.g. `init(LPS::device_331AP, LPS::sa0_high)`).
+  a device was successfully detected.
 - `deviceType getDeviceType(void)` <br> Returns the device type
   detected by `init()`.
 - `byte getAddress(void)` <br> Returns the address detected by
