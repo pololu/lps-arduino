@@ -27,40 +27,34 @@ on the measured pressure.
 
 ### Hardware
 
+A LPS carrier can be purchased from Pololu's website. Before
+continuing, careful reading of the product page as well as the chip
+datasheet is recommended.
+
 Make the following connections with wires between the Arduino and the
 LPS board:
 
-#### Arduino Uno (and other ATmega328/ATmega168 boards)
+#### 5V Arduino boards
 
-               Arduino      LPS board
-                    5V  ->  VIN
-                   GND  ->  GND
-    SDA (Analog pin 4)  ->  SDA
-    SCL (Analog pin 5)  ->  SCL
+(including Arduino Uno, Leonardo, Mega; Pololu A-Star 32U4)
 
-#### Arduino Leonardo/Micro (and other ATmega32U4 boards)
+    Arduino   LPS board
+    -------   ---------
+         5V - VIN
+        GND - GND
+        SDA - SDA
+        SCL - SCL
 
-                Arduino      LPS board
-                     5V  ->  VIN
-                    GND  ->  GND
-    SDA (Digital pin 2)  ->  SDA
-    SCL (Digital pin 3)  ->  SCL
+#### 3.3V Arduino boards
 
-#### Arduino Mega
+(including Arduino Due)
 
-                 Arduino      LPS board
-                      5V  ->  VIN
-                     GND  ->  GND
-    SDA (Digital pin 20)  ->  SDA
-    SCL (Digital pin 21)  ->  SCL
-
-#### Arduino Due
-
-                 Arduino      LPS board
-                    3.3V  ->  VIN or VDD
-                     GND  ->  GND
-    SDA (Digital pin 20)  ->  SDA
-    SCL (Digital pin 21)  ->  SCL
+    Arduino   LPS board
+    -------   ---------
+        3V3 - VIN
+        GND - GND
+        SDA - SDA
+        SCL - SCL
 
 ### Software
 
