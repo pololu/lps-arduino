@@ -164,7 +164,7 @@ Example output:
 - `float pressureToAltitudeMeters(float pressure_mbar, float
   altimeter_setting_mbar)` <br> Converts a pressure in mbar to an
   altitude in meters, using the 1976
-  [U.S. Standard Atmosphere](http://en.wikipedia.org/wiki/U.S._Standard_Atmosphere)
+  [U.S. Standard Atmosphere](https://en.wikipedia.org/wiki/U.S._Standard_Atmosphere)
   model (note that this formula only applies up to an altitude of 11
   km, or about 36000 ft). If the optional `altimeter_setting_mbar`
   argument is given, specifying an "altimeter setting" or "QNH"
