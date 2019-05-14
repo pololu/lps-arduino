@@ -55,7 +55,7 @@ void setup()
 
 void loop()
 {
-  ps.opcHelper(pressure, altitude);
+  float pressure_diff = ps.opcHelper(pressure, altitude);
 
   delay(90000);
 }

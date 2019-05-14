@@ -120,7 +120,7 @@ class LPS
 
     float altitudeToQFF(float altitude_meters, float tempC = 15.0, bool please_return_mbars = true);
 
-    int16_t opcHelper(float my_local_qff_mbar, float my_local_altitude_meters);
+    int32_t opcHelper(float my_local_qff_mbar, float my_local_altitude_meters);
 
   private:
     deviceType _device; // chip type (331AP or 25H)

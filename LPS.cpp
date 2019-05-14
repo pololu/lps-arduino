@@ -252,7 +252,7 @@ float LPS::altitudeToQFF(float altitude_meters, float tempC, bool please_return_
  * you see what your RPDS_L (0x39) and/or RPDS_H (0x3A) should be. Then you can use the
  * above to report accurately your local true sea level barometric pressure (QFF).
  */
-int16_t LPS::opcHelper(float my_local_qff_mbar, float my_local_altitude_meters) {
+int32_t LPS::opcHelper(float my_local_qff_mbar, float my_local_altitude_meters) {
   // real programmers would turn on BDU here, first.
   int32_t currentRawPressure = LPS::readPressureRaw();
   byte rpds_low, rpds_high;
