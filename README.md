@@ -206,7 +206,7 @@ Example output:
 
 ## Version history
 
-* 3.1.0 (2018-05-07): Added helper functions and variables
+* 3.1.0 (2019-05-07): Added helper functions and variables
    * Enums for FIFO modes
    * Enable FIFO function
    * Altitude to sea level pressure function
