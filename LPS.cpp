@@ -292,14 +292,6 @@ int16_t LPS::opcHelper(float my_local_qff_mbar, float my_local_altitude_meters) 
 
   returnVal = (currentRawPressure - (int32_t)(my_local_qff_mbar * 4096.0));
 
-  Serial.print("Raw - local:\t\t");
-  Serial.print(returnVal);
-  Serial.println(" int16_t");
-  Serial.print("High byte:\t\t");
-  Serial.print(highByte(returnVal), BIN);
-  Serial.print("\tLow byte: ");
-  Serial.println(lowByte(returnVal), BIN);
-
   return returnVal;
 
 }
