@@ -252,7 +252,7 @@ float LPS::altitudeToQFF(float altitude_meters, float tempC, bool please_return_
  * you see what your RPDS_L (0x39) and/or RPDS_H (0x3A) should be. Then you can use the
  * above to report accurately your local true sea level barometric pressure (QFF).
  */
-int16_t LPS::opcHelper(float my_local_qff_mbar, float my_local_altitude_meters) {
+int32_t LPS::opcHelper(float my_local_qff_mbar, float my_local_altitude_meters) {
   // real programmers would turn on BDU here, first.
   int32_t currentRawPressure = LPS::readPressureRaw();
   byte rpds_low, rpds_high;
@@ -291,14 +291,6 @@ int16_t LPS::opcHelper(float my_local_qff_mbar, float my_local_altitude_meters) 
   Serial.println(" binary");
 
   returnVal = (currentRawPressure - (int32_t)(my_local_qff_mbar * 4096.0));
-
-  Serial.print("Raw - local:\t\t");
-  Serial.print(returnVal);
-  Serial.println(" int16_t");
-  Serial.print("High byte:\t\t");
-  Serial.print(highByte(returnVal), BIN);
-  Serial.print("\tLow byte: ");
-  Serial.println(lowByte(returnVal), BIN);
 
   return returnVal;
 

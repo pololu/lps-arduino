@@ -199,7 +199,7 @@ Example output:
 - `float altitudeToQFF(float altitude_meters, float tempC, bool return_mbars)` <br>
   Useful for reporting sea level pressure assuming you know the altitude of your
   sensor. Once your device is calibrated, you can use this to report local pressure.
-- `int16_t opcHelper(float my_local_qff_mbar, float my_local_altitude_meters)` <br>
+- `int32_t opcHelper(float my_local_qff_mbar, float my_local_altitude_meters)` <br>
   Useful for calibrating the device so you can assign RPDS registers to correct for
   changes to pressure value reporting from the device due to soldering.
 
