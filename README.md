@@ -2,7 +2,6 @@
 
 Version: 3.0.0<br>
 Release date: 2016-08-17<br>
-[![Build Status](https://travis-ci.org/pololu/lps-arduino.svg?branch=master)](https://travis-ci.org/pololu/lps-arduino)<br>
 [www.pololu.com](https://www.pololu.com/)
 
 
