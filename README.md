@@ -9,14 +9,17 @@ Release date: 2016-08-17<br>
 
 This is a library for an
 [Arduino-compatible controller](https://www.pololu.com/arduino) that
-interfaces with ST LPS25H and LPS331AP pressure sensors on Pololu
+interfaces with ST LPS25HB, LPS25H, and LPS331AP pressure sensors on Pololu
 boards. The library makes it simple to read the raw pressure data from
 these boards:
 
-* [Pololu LPS25H pressure/altitude sensor carrier](https://www.pololu.com/catalog/product/2724)
+* [Pololu LPS25HB pressure/altitude sensor carrier](https://www.pololu.com/catalog/product/2867)
 * [Pololu LPS331AP pressure/altitude sensor carrier](https://www.pololu.com/catalog/product/2126)
-* [AltIMU-10 v3 (L3GD20H, LSM303D, and LSM331AP carrier)](https://www.pololu.com/catalog/product/2469)
-* [AltIMU-10 (L3GD20, LSM303DLHC, and LSM331AP carrier)](https://www.pololu.com/catalog/product/1269) (discontinued)
+* [AltIMU-10 v5 (LSM6DS33, LIS3MDL, and LPS25H Carrier)](https://www.pololu.com/catalog/product/2739)
+* [Pololu LPS25H pressure/altitude sensor carrier](https://www.pololu.com/catalog/product/2724) (discontinued)
+* [AltIMU-10 v4 (L3GD20H, LSM303D, and LPS25H carrier)](https://www.pololu.com/catalog/product/2470) (discontinued)
+* [AltIMU-10 v3 (L3GD20H, LSM303D, and LPS331AP carrier)](https://www.pololu.com/catalog/product/2469) (discontinued)
+* [AltIMU-10 (L3GD20, LSM303DLHC, and LPS331AP carrier)](https://www.pololu.com/catalog/product/1269) (discontinued)
 
 The library also provides functions to help calculate altitude based
 on the measured pressure.
