@@ -18,7 +18,7 @@
 LPS::LPS(void)
 {
   _device = device_auto;
-  
+
   // Pololu board pulls SA0 high, so default assumption is that it is
   // high
   address = SA0_HIGH_ADDRESS;
@@ -31,7 +31,7 @@ bool LPS::init(deviceType device, byte sa0)
 {
   if (!detectDeviceAndAddress(device, (sa0State)sa0))
     return false;
-    
+
   switch (_device)
   {
     case device_25H:
@@ -40,15 +40,16 @@ bool LPS::init(deviceType device, byte sa0)
       translated_regs[-THS_P_L]       = LPS25H_THS_P_L;
       translated_regs[-THS_P_H]       = LPS25H_THS_P_H;
       return true;
-      break;
-      
+
     case device_331AP:
       translated_regs[-INTERRUPT_CFG] = LPS331AP_INTERRUPT_CFG;
       translated_regs[-INT_SOURCE]    = LPS331AP_INT_SOURCE;
       translated_regs[-THS_P_L]       = LPS331AP_THS_P_L;
       translated_regs[-THS_P_H]       = LPS331AP_THS_P_H;
       return true;
-      break;
+
+    default:
+      return false;
   }
 }
 
@@ -88,7 +89,7 @@ void LPS::writeReg(int reg, byte value)
 byte LPS::readReg(int reg)
 {
   byte value;
-  
+
   // if dummy register address, look up actual translated address (based on device type)
   if (reg < 0)
   {
@@ -100,7 +101,6 @@ byte LPS::readReg(int reg)
   Wire.endTransmission(false); // restart
   Wire.requestFrom(address, (byte)1);
   value = Wire.read();
-  Wire.endTransmission();
 
   return value;
 }
@@ -125,8 +125,6 @@ int32_t LPS::readPressureRaw(void)
   Wire.write(PRESS_OUT_XL | (1 << 7));
   Wire.endTransmission();
   Wire.requestFrom(address, (byte)3);
-
-  while (Wire.available() < 3);
 
   uint8_t pxl = Wire.read();
   uint8_t pl = Wire.read();
@@ -156,8 +154,6 @@ int16_t LPS::readTemperatureRaw(void)
   Wire.write(TEMP_OUT_L | (1 << 7));
   Wire.endTransmission();
   Wire.requestFrom(address, (byte)2);
-
-  while (Wire.available() < 2);
 
   uint8_t tl = Wire.read();
   uint8_t th = Wire.read();
@@ -206,7 +202,7 @@ bool LPS::detectDeviceAndAddress(deviceType device, sa0State sa0)
 bool LPS::detectDevice(deviceType device)
 {
   int id = testWhoAmI(address);
-  
+
   if ((device == device_auto || device == device_25H) && id == LPS25H_WHO_ID)
   {
     _device = device_25H;
