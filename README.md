@@ -1,7 +1,5 @@
 # Arduino library for Pololu LPS pressure sensor boards
 
-Version: 3.0.0<br>
-Release date: 2016-08-17<br>
 [www.pololu.com](https://www.pololu.com/)
 
 
@@ -174,6 +172,7 @@ Example output:
 
 ## Version history
 
+* 3.0.1 (2022-08-31): Fixed a compile error on the ESP8266.
 * 3.0.0 (2016-08-17): Updated library to work with the Arduino Library Manager.
 * 2.0.0 (2014-06-03): Major rewrite. List of significant changes:
    * Renamed library to LPS.
