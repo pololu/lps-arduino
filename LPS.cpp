@@ -12,6 +12,7 @@
 
 #define LPS331AP_WHO_ID 0xBB
 #define LPS25H_WHO_ID   0xBD
+#define LPS22DF_WHO_ID  0xB4
 
 // Constructors //////////////////////////////////////////////////////
 
@@ -34,7 +35,12 @@ bool LPS::init(deviceType device, byte sa0)
 
   switch (_device)
   {
+    case device_22DF:
+      translated_regs[-CTRL_REG1]     = LPS22DF_CTRL_REG1;
+      return true;
+
     case device_25H:
+      translated_regs[-CTRL_REG1]     = LPS25H_CTRL_REG1;
       translated_regs[-INTERRUPT_CFG] = LPS25H_INTERRUPT_CFG;
       translated_regs[-INT_SOURCE]    = LPS25H_INT_SOURCE;
       translated_regs[-THS_P_L]       = LPS25H_THS_P_L;
@@ -42,6 +48,7 @@ bool LPS::init(deviceType device, byte sa0)
       return true;
 
     case device_331AP:
+      translated_regs[-CTRL_REG1]     = LPS331AP_CTRL_REG1;
       translated_regs[-INTERRUPT_CFG] = LPS331AP_INTERRUPT_CFG;
       translated_regs[-INT_SOURCE]    = LPS331AP_INT_SOURCE;
       translated_regs[-THS_P_L]       = LPS331AP_THS_P_L;
@@ -56,7 +63,13 @@ bool LPS::init(deviceType device, byte sa0)
 // turns on sensor and enables continuous output
 void LPS::enableDefault(void)
 {
-  if (_device == device_25H)
+  if (_device == device_22DF)
+  {
+    // 0x18 = 0b00011000
+    // ODR = 0011 (10 Hz pressure & temperature output data rate); AVG = 000 (4 averages)
+     writeReg(CTRL_REG1, 0x18);
+  }
+  else if (_device == device_25H)
   {
     // 0xB0 = 0b10110000
     // PD = 1 (active mode);  ODR = 011 (12.5 Hz pressure & temperature output data rate)
@@ -203,6 +216,11 @@ bool LPS::detectDevice(deviceType device)
 {
   int id = testWhoAmI(address);
 
+  if ((device == device_auto || device == device_22DF) && id == LPS22DF_WHO_ID)
+  {
+    _device = device_22DF;
+    return true;
+  }
   if ((device == device_auto || device == device_25H) && id == LPS25H_WHO_ID)
   {
     _device = device_25H;
