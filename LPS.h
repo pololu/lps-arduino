@@ -6,7 +6,7 @@
 class LPS
 {
   public:
-    enum deviceType { device_331AP, device_25H, device_auto };
+    enum deviceType { device_331AP, device_25H, device_22DF, device_auto };
     enum sa0State { sa0_low, sa0_high, sa0_auto };
 
     // register addresses
@@ -41,9 +41,6 @@ class LPS
       FIFO_STATUS             = 0x2F, // 25H
       
       AMP_CTRL                = 0x30, // 331AP
-      
-      RPDS_L                  = 0x39, // 25H
-      RPDS_H                  = 0x3A, // 25H
       
       DELTA_PRESS_XL          = 0x3C, // 331AP
       DELTA_PRESS_L           = 0x3D, // 331AP
@@ -100,9 +97,9 @@ class LPS
 	  LPS25H_RPDS_L           = 0x39,
 	  LPS25H_RPDS_H           = 0x3A,
 	  
-	  LPS22DF__INTERRUPT_CFG  = 0x0B,
-	  LPS22DF__THIS_P_L       = 0x0C,
-	  LPS22DF__THIS_P_H       = 0x0D,
+	  LPS22DF_INTERRUPT_CFG  = 0x0B,
+	  LPS22DF_THS_P_L       = 0x0C,
+	  LPS22DF_THS_P_H       = 0x0D,
 	  LPS22DF_CTRL_REG1       = 0x10,
 	  LPS22DF_CTRL_REG2       = 0x11,
 	  LPS22DF_CTRL_REG3       = 0x12,
