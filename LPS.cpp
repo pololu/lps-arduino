@@ -62,7 +62,7 @@ bool LPS::init(deviceType device, byte sa0)
       translated_regs[-THS_P_L]       = LPS331AP_THS_P_L;
       translated_regs[-THS_P_H]       = LPS331AP_THS_P_H;
       return true;
-      
+
     case device_22DF:
       translated_regs[-REF_P_L]       = LPS22DF_REF_P_L;
       translated_regs[-REF_P_H]       = LPS22DF_REF_P_H;
@@ -194,7 +194,7 @@ float LPS::readTemperatureF(void)
   else if (_device == device_25H || _device == device_331AP)
   {
     return 108.5 + (float)readTemperatureRaw() / 480 * 1.8;
-  }    
+  }
 }
 
 // reads temperature and returns raw 16-bit sensor output
