@@ -97,9 +97,9 @@ class LPS
 	  LPS25H_RPDS_L           = 0x39,
 	  LPS25H_RPDS_H           = 0x3A,
 	  
-	  LPS22DF_INTERRUPT_CFG  = 0x0B,
-	  LPS22DF_THS_P_L       = 0x0C,
-	  LPS22DF_THS_P_H       = 0x0D,
+	  LPS22DF_INTERRUPT_CFG   = 0x0B,
+	  LPS22DF_THS_P_L         = 0x0C,
+	  LPS22DF_THS_P_H         = 0x0D,
 	  LPS22DF_CTRL_REG1       = 0x10,
 	  LPS22DF_CTRL_REG2       = 0x11,
 	  LPS22DF_CTRL_REG3       = 0x12,
