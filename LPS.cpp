@@ -36,47 +36,47 @@ bool LPS::init(deviceType device, byte sa0)
   switch (_device)
   {
     case device_25H:
-	  translated_regs[-REF_P_L]       = LPS25H_REF_P_L;
-	  translated_regs[-REF_P_H]       = LPS25H_REF_P_H;
-	  translated_regs[-CTRL_REG1]     = LPS25H_CTRL_REG1;
-	  translated_regs[-CTRL_REG2]     = LPS25H_CTRL_REG2;
-	  translated_regs[-CTRL_REG3]     = LPS25H_CTRL_REG3;
-	  translated_regs[-CTRL_REG4]     = LPS25H_CTRL_REG4;
+      translated_regs[-REF_P_L]       = LPS25H_REF_P_L;
+      translated_regs[-REF_P_H]       = LPS25H_REF_P_H;
+      translated_regs[-CTRL_REG1]     = LPS25H_CTRL_REG1;
+      translated_regs[-CTRL_REG2]     = LPS25H_CTRL_REG2;
+      translated_regs[-CTRL_REG3]     = LPS25H_CTRL_REG3;
+      translated_regs[-CTRL_REG4]     = LPS25H_CTRL_REG4;
       translated_regs[-INTERRUPT_CFG] = LPS25H_INTERRUPT_CFG;
       translated_regs[-INT_SOURCE]    = LPS25H_INT_SOURCE;
-	  translated_regs[-FIFO_CTRL]     = LPS25H_FIFO_CTRL;
+      translated_regs[-FIFO_CTRL]     = LPS25H_FIFO_CTRL;
       translated_regs[-THS_P_L]       = LPS25H_THS_P_L;
       translated_regs[-THS_P_H]       = LPS25H_THS_P_H;
-	  translated_regs[-RPDS_L]        = LPS25H_RPDS_L;
-	  translated_regs[-RPDS_H]        = LPS25H_RPDS_H;
+      translated_regs[-RPDS_L]        = LPS25H_RPDS_L;
+      translated_regs[-RPDS_H]        = LPS25H_RPDS_H;
       return true;
 
     case device_331AP:
-	  translated_regs[-REF_P_L]       = LPS331AP_REF_P_L;
-	  translated_regs[-REF_P_H]       = LPS331AP_REF_P_H;
-	  translated_regs[-CTRL_REG1]     = LPS331AP_CTRL_REG1;
-	  translated_regs[-CTRL_REG2]     = LPS331AP_CTRL_REG2;
-	  translated_regs[-CTRL_REG3]     = LPS331AP_CTRL_REG3;
+      translated_regs[-REF_P_L]       = LPS331AP_REF_P_L;
+      translated_regs[-REF_P_H]       = LPS331AP_REF_P_H;
+      translated_regs[-CTRL_REG1]     = LPS331AP_CTRL_REG1;
+      translated_regs[-CTRL_REG2]     = LPS331AP_CTRL_REG2;
+      translated_regs[-CTRL_REG3]     = LPS331AP_CTRL_REG3;
       translated_regs[-INTERRUPT_CFG] = LPS331AP_INTERRUPT_CFG;
       translated_regs[-INT_SOURCE]    = LPS331AP_INT_SOURCE;
       translated_regs[-THS_P_L]       = LPS331AP_THS_P_L;
       translated_regs[-THS_P_H]       = LPS331AP_THS_P_H;
       return true;
-	  
-	case device_22DF:
-	  translated_regs[-REF_P_L]       = LPS22DF_REF_P_L;
-	  translated_regs[-REF_P_H]       = LPS22DF_REF_P_H;
-	  translated_regs[-CTRL_REG1]     = LPS22DF_CTRL_REG1;
-	  translated_regs[-CTRL_REG2]     = LPS22DF_CTRL_REG2;
-	  translated_regs[-CTRL_REG3]     = LPS22DF_CTRL_REG3;
-	  translated_regs[-CTRL_REG4]     = LPS22DF_CTRL_REG4;
+      
+    case device_22DF:
+      translated_regs[-REF_P_L]       = LPS22DF_REF_P_L;
+      translated_regs[-REF_P_H]       = LPS22DF_REF_P_H;
+      translated_regs[-CTRL_REG1]     = LPS22DF_CTRL_REG1;
+      translated_regs[-CTRL_REG2]     = LPS22DF_CTRL_REG2;
+      translated_regs[-CTRL_REG3]     = LPS22DF_CTRL_REG3;
+      translated_regs[-CTRL_REG4]     = LPS22DF_CTRL_REG4;
       translated_regs[-INTERRUPT_CFG] = LPS22DF_INTERRUPT_CFG;
       translated_regs[-INT_SOURCE]    = LPS22DF_INT_SOURCE;
-	  translated_regs[-FIFO_CTRL]     = LPS22DF_FIFO_CTRL;
+      translated_regs[-FIFO_CTRL]     = LPS22DF_FIFO_CTRL;
       translated_regs[-THS_P_L]       = LPS22DF_THS_P_L;
       translated_regs[-THS_P_H]       = LPS22DF_THS_P_H;
-	  translated_regs[-RPDS_L]        = LPS22DF_RPDS_L;
-	  translated_regs[-RPDS_H]        = LPS22DF_RPDS_H;
+      translated_regs[-RPDS_L]        = LPS22DF_RPDS_L;
+      translated_regs[-RPDS_H]        = LPS22DF_RPDS_H;
       return true;
 
     default:
@@ -194,7 +194,7 @@ float LPS::readTemperatureF(void)
   else if (_device == device_25H || _device == device_331AP)
   {
     return 108.5 + (float)readTemperatureRaw() / 480 * 1.8;
-  }	
+  }    
 }
 
 // reads temperature and returns raw 16-bit sensor output
