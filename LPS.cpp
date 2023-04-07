@@ -221,11 +221,11 @@ int16_t LPS::readTemperatureRaw(void)
   if (_device == device_25H || _device == device_331AP)
   {
     // assert MSB to enable register address auto-increment
-    Wire.write(PRESS_OUT_XL | (1 << 7));
+    Wire.write(TEMP_OUT_L | (1 << 7));
   }
   else // 22DF
   {
-    Wire.write(PRESS_OUT_XL);
+    Wire.write(TEMP_OUT_L);
   }
   Wire.endTransmission();
   Wire.requestFrom(address, (byte)2);
