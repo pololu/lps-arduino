@@ -60,7 +60,7 @@ class LPS
       CTRL_REG1        = -3,
       CTRL_REG2        = -4,
       CTRL_REG3        = -5,
-      CTRL_REG4        = -6, 
+      CTRL_REG4        = -6,
       INTERRUPT_CFG    = -7,
       INT_SOURCE       = -8,
       FIFO_CTRL        = -9,
@@ -136,7 +136,7 @@ class LPS
   private:
     deviceType _device; // chip type (331AP, 25H, 22DF)
     byte address;
-    
+
     static const int dummy_reg_count = 13;
     regAddr translated_regs[dummy_reg_count + 1]; // index 0 not used
 

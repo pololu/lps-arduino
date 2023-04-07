@@ -92,6 +92,10 @@ void LPS::enableDefault(void)
     // 0x18 = 0b00011000
     // ODR = 0011 (10 Hz pressure & temperature output data rate); AVG = 000 (4 averages)
     writeReg(CTRL_REG1, 0x18);
+
+    // 0x01 = 0b00000001
+    // INT_H_L = 0 (INT pin active high); PP_OD = 0 (INT pin push-pull); IF_ADD_INC = 1 (register address auto-increment enabled)
+    writeReg(CTRL_REG3, 0x01);
   }
   else if (_device == device_25H)
   {
@@ -158,8 +162,15 @@ float LPS::readPressureInchesHg(void)
 int32_t LPS::readPressureRaw(void)
 {
   Wire.beginTransmission(address);
-  // assert MSB to enable register address auto-increment
-  Wire.write(PRESS_OUT_XL | (1 << 7));
+  if (_device == device_25H || _device == device_331AP)
+  {
+    // assert MSB to enable register address auto-increment
+    Wire.write(PRESS_OUT_XL | (1 << 7));
+  }
+  else // 22DF
+  {
+    Wire.write(PRESS_OUT_XL);
+  }
   Wire.endTransmission();
   Wire.requestFrom(address, (byte)3);
 
@@ -182,6 +193,9 @@ float LPS::readTemperatureC(void)
   {
     return 42.5 + (float)readTemperatureRaw() / 480;
   }
+
+  // fall-through case if device is not set
+  return 0;
 }
 
 // reads temperature in degrees F
@@ -195,14 +209,24 @@ float LPS::readTemperatureF(void)
   {
     return 108.5 + (float)readTemperatureRaw() / 480 * 1.8;
   }
+
+  // fall-through case if device is not set
+  return 0;
 }
 
 // reads temperature and returns raw 16-bit sensor output
 int16_t LPS::readTemperatureRaw(void)
 {
   Wire.beginTransmission(address);
-  // assert MSB to enable register address auto-increment
-  Wire.write(TEMP_OUT_L | (1 << 7));
+  if (_device == device_25H || _device == device_331AP)
+  {
+    // assert MSB to enable register address auto-increment
+    Wire.write(PRESS_OUT_XL | (1 << 7));
+  }
+  else // 22DF
+  {
+    Wire.write(PRESS_OUT_XL);
+  }
   Wire.endTransmission();
   Wire.requestFrom(address, (byte)2);
 
