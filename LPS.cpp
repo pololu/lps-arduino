@@ -195,7 +195,7 @@ float LPS::readTemperatureC(void)
   }
 
   // fall-through case if device is not set
-  return 0;
+  return NAN;
 }
 
 // reads temperature in degrees F
@@ -211,7 +211,7 @@ float LPS::readTemperatureF(void)
   }
 
   // fall-through case if device is not set
-  return 0;
+  return NAN;
 }
 
 // reads temperature and returns raw 16-bit sensor output
