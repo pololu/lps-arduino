@@ -6,11 +6,12 @@
 ## Summary
 
 This is a library for an
-[Arduino-compatible controller](https://www.pololu.com/arduino) that
-interfaces with ST LPS25HB, LPS25H, and LPS331AP pressure sensors on Pololu
-boards. The library makes it simple to read the raw pressure data from
-these boards:
+[Arduino-compatible controller](https://www.pololu.com/arduino) that interfaces
+with ST LPS22DF, LPS25HB, LPS25H, and LPS331AP pressure sensors on Pololu
+boards. The library makes it simple to read the raw pressure data from these
+boards:
 
+* [Pololu LPS22DF pressure/altitude sensor carrier](https://www.pololu.com/catalog/product/2898)
 * [Pololu LPS25HB pressure/altitude sensor carrier](https://www.pololu.com/catalog/product/2867)
 * [Pololu LPS331AP pressure/altitude sensor carrier](https://www.pololu.com/catalog/product/2126)
 * [AltIMU-10 v5 (LSM6DS33, LIS3MDL, and LPS25H Carrier)](https://www.pololu.com/catalog/product/2739)
@@ -119,21 +120,20 @@ Example output:
 
 ## Library reference
 
-- `bool init(deviceType device, byte sa0)` <br> Initializes the
-  library with the device being used (`LPS::device_331AP`,
-  `LPS::device_25H`, or `LPS::device_auto`) and the state of the SA0
-  pin (`LPS::sa0_low`, `LPS::sa0_high`, or `LPS::sa0_auto`; `LOW` or
-  `HIGH` also work), which determines the least significant bit of the
-  sensor's address. Both of these arguments are optional; if they are
-  not specified, the library will try to automatically detect the
-  device and address. The return value is a boolean indicating whether
-  a device was successfully detected.
+- `bool init(deviceType device, byte sa0)` <br> Initializes the library with the
+  device being used (`LPS::device_331AP`, `LPS::device_25H`, `LPS::device_22DF`,
+  or `LPS::device_auto`) and the state of the SA0 pin (`LPS::sa0_low`,
+  `LPS::sa0_high`, or `LPS::sa0_auto`; `LOW` or `HIGH` also work), which
+  determines the least significant bit of the sensor's address. Both of these
+  arguments are optional; if they are not specified, the library will try to
+  automatically detect the device and address. The return value is a boolean
+  indicating whether a device was successfully detected.
 - `deviceType getDeviceType(void)` <br> Returns the device type
   detected by `init()`.
 - `byte getAddress(void)` <br> Returns the address detected by
   `init()`.
 - `void enableDefault(void)` <br> Turns on the pressure sensor in a
-  default configuration that gives continous output at 12.5 Hz.
+  default configuration that gives continuous output at 10 Hz or 12.5 Hz.
 - `void writeReg(int reg, byte value)` <br> Writes a pressure sensor
   register with the given value. Register addresses are defined by the
   regAddr enumeration type in LPS.h.  Example use:
@@ -172,6 +172,7 @@ Example output:
 
 ## Version history
 
+* 3.1.0 (2023-05-10): Added support for LPS22DF.
 * 3.0.1 (2022-08-31): Fixed a compile error on the ESP8266.
 * 3.0.0 (2016-08-17): Updated library to work with the Arduino Library Manager.
 * 2.0.0 (2014-06-03): Major rewrite. List of significant changes:
