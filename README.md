@@ -172,7 +172,7 @@ Example output:
 
 ## Version history
 
-* 3.1.0 (2023-05-10): Added support for LPS22DF.
+* 3.1.0 (2023-06-08): Added support for LPS22DF.
 * 3.0.1 (2022-08-31): Fixed a compile error on the ESP8266.
 * 3.0.0 (2016-08-17): Updated library to work with the Arduino Library Manager.
 * 2.0.0 (2014-06-03): Major rewrite. List of significant changes:
