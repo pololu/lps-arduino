@@ -14,6 +14,7 @@ boards:
 * [Pololu LPS22DF pressure/altitude sensor carrier](https://www.pololu.com/catalog/product/2898)
 * [Pololu LPS25HB pressure/altitude sensor carrier](https://www.pololu.com/catalog/product/2867)
 * [Pololu LPS331AP pressure/altitude sensor carrier](https://www.pololu.com/catalog/product/2126)
+* [AltIMU-10 v6 (LSM6DSO, LIS3MDL, and LPS22DF Carrier)](https://www.pololu.com/catalog/product/2863)
 * [AltIMU-10 v5 (LSM6DS33, LIS3MDL, and LPS25H Carrier)](https://www.pololu.com/catalog/product/2739)
 * [Pololu LPS25H pressure/altitude sensor carrier](https://www.pololu.com/catalog/product/2724) (discontinued)
 * [AltIMU-10 v4 (L3GD20H, LSM303D, and LPS25H carrier)](https://www.pololu.com/catalog/product/2470) (discontinued)
